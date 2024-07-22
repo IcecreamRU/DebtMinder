@@ -22,20 +22,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import ru.icecreamru.debtminder.domain.model.Debt
-import ru.icecreamru.debtminder.domain.usecase.AddDebtUseCase
-import ru.icecreamru.debtminder.domain.usecase.DeleteDebtUseCase
-import ru.icecreamru.debtminder.domain.usecase.GetDebtsUseCase
 import ru.icecreamru.debtminder.presentation.ui.components.AddDebtDialog
 import ru.icecreamru.debtminder.presentation.ui.components.DebtItem
-import ru.icecreamru.debtminder.presentation.ui.theme.DebtMinderTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,7 +52,13 @@ fun DebtListScreen(
                     DebtItem(
                         debt = debt,
                         onItemClick = { /* Можно добавить обработку нажатия */ },
-                        onDeleteClick = { viewModel.handleEvent(DebtListContract.Event.DeleteDebt(debt)) }
+                        onDeleteClick = {
+                            viewModel.handleEvent(
+                                DebtListContract.Event.DeleteDebt(
+                                    debt
+                                )
+                            )
+                        }
 
                     )
                 }
